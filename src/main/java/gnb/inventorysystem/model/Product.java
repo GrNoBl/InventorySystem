@@ -2,7 +2,7 @@ package gnb.inventorysystem.model;
 
 import javafx.collections.ObservableList;
 
-public class Product implements Comparable<Product> {
+public class Product{
     private ObservableList<Part> associatedParts;
     private int id;
     private String name;
@@ -18,14 +18,6 @@ public class Product implements Comparable<Product> {
         this.stock = stock;
         this.min = min;
         this.max = max;
-    }
-
-    @Override
-    public int compareTo(Product otherProducts) {
-        int thisId = this.id;
-        int otherId = otherProducts.id;
-
-        return Integer.compare(thisId, otherId);
     }
 
     public void setId(int id) {

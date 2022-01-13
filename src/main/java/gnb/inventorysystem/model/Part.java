@@ -1,6 +1,6 @@
 package gnb.inventorysystem.model;
 
-public abstract class Part implements Comparable<Part>{
+public abstract class Part {
     private int id;
     private String name;
     private double price;
@@ -15,14 +15,6 @@ public abstract class Part implements Comparable<Part>{
         this.stock = stock;
         this.min = min;
         this.max = max;
-    }
-
-    @Override
-    public int compareTo(Part otherPart) {
-        int thisId = this.id;
-        int otherId = otherPart.id;
-
-        return Integer.compare(thisId, otherId);
     }
 
     public void setId(int id) {
