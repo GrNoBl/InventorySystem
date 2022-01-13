@@ -82,7 +82,7 @@ public class Inventory {
 
     public static ObservableList<Product> lookupProduct(String name) {
         ObservableList<Product> foundProducts = FXCollections.observableArrayList();
-        for (Product thisProduct: allProduct) {
+        for (Product thisProduct: allProducts) {
             if (thisProduct.getName() == name) {
                 foundProducts.add(thisProduct);
             }
@@ -91,13 +91,11 @@ public class Inventory {
     }
 
     public static void deletePart(Part selectedPart) {
-        index = allParts.indexOf(selectedPart);
-        allParts.remove(index);
+        allParts.remove(selectedPart);
     }
 
     public static void deleteProduct(Product selectedProduct) {
-        index = allProducts.indexOf(selectedProduct);
-        allProducts.remove(index);
+        allProducts.remove(selectedProduct);
     }
 
     public static ObservableList<Part> getAllParts() {
