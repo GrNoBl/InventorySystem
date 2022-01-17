@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="685.0" prefWidth="1158.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.Pane?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="685.0" prefWidth="1158.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="69.0" layoutY="72.0" text="Modify Product">
          <font>
@@ -49,4 +50,4 @@
       </TableView>
       <TextField fx:id="modifyProductFieldMin" promptText="Enter Min" layoutX="376.0" layoutY="378.0" />
    </children>
-</AnchorPane>
+</Pane>

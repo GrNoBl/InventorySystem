@@ -1,9 +1,10 @@
 package gnb.inventorysystem.model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Product{
-    private ObservableList<Part> associatedParts;
+    private final ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;
     private String name;
     private double price;

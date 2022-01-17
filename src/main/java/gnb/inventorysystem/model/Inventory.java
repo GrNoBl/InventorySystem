@@ -7,8 +7,8 @@ import javafx.collections.transformation.SortedList;
 import java.util.Comparator;
 
 public class Inventory {
-    private static ObservableList<Part> allParts;
-    private static ObservableList<Product> allProducts;
+    private static final ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private static final ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     public static void addPart(Part newPart) {
         allParts.add(newPart);
