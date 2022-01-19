@@ -16,50 +16,50 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddPartFormView implements Initializable {
+public class ModifyPartFormView implements Initializable {
     @FXML
-    private RadioButton addPartRadioInHouse;
+    private RadioButton modifyRadioInHouse;
 
     @FXML
-    private RadioButton addPartRadioOutsourced;
+    private RadioButton modifyPartRadioOutsourced;
 
     @FXML
-    private TextField addPartFieldId;
+    private TextField modifyPartFieldId;
 
     @FXML
-    private TextField addPartFieldName;
+    private TextField modifyPartFieldName;
 
     @FXML
-    private TextField addPartFieldInventory;
+    private TextField modifyPartFieldInventory;
 
     @FXML
-    private TextField addPartFieldPrice;
+    private TextField modifyPartFieldPrice;
 
     @FXML
-    private TextField addPartFieldMax;
+    private TextField modifyPartFieldMax;
 
     @FXML
-    private TextField addPartFieldMin;
+    private TextField modifyPartFieldMin;
 
     @FXML
-    private TextField addPartFieldMachineId;
+    private TextField modifyPartFieldMachineId;
 
     @FXML
-    private TextField addPartFieldCompanyName;
+    private TextField modifyPartFieldCompanyName;
 
     /* BEGIN <--- Buttons FXML section ---> */
     @FXML
-    private Button addPartButtonSave;
+    private Button modifyPartButtonSave;
 
-    @FXML void saveAdd(ActionEvent e) {
-        System.out.println("Implement saveAdd button action!");
+    @FXML void saveModify(ActionEvent e) {
+        System.out.println("Implement saveModify button action!");
     }
 
     @FXML
-    private Button addPartButtonCancel;
+    private Button modifyPartButtonCancel;
 
     @FXML
-    private void cancelAdd(ActionEvent e) throws IOException {
+    private void cancelModify(ActionEvent e) throws IOException {
         Stage stage = App.getAppStage();
         Parent root = FXMLLoader.load(App.class.getResource("Main-Form.fxml"));
         Scene scene = new Scene(root);
@@ -69,11 +69,10 @@ public class AddPartFormView implements Initializable {
     }
     /* BEGIN <--- Buttons FXML section ---> */
 
-    private final AddPartFormViewModel viewModel = new AddPartFormViewModel();
+    private final ModifyPartFormViewModel viewModel = new ModifyPartFormViewModel();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-
 }

@@ -23,6 +23,7 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Main-Form.fxml"));
         Scene scene = new Scene(root);
         appStage.setScene(scene);
+        appStage.setTitle("Inventory App 1.0");
         appStage.show();
     }
 

@@ -27,7 +27,7 @@ public class MainFormView implements Initializable {
     @FXML
     private TextField mainFormProductsSearch;
 
-    /* START <--- Buttons FXML section ---> */
+    /* START    <--- Buttons FXML section ---> */
     @FXML
     private Button mainFormPartsAdd;
 
@@ -37,6 +37,7 @@ public class MainFormView implements Initializable {
             Parent root = FXMLLoader.load(App.class.getResource("Add-Part-Form.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setTitle("Add Part");
             stage.show();
     }
 
@@ -49,6 +50,7 @@ public class MainFormView implements Initializable {
         Parent root = FXMLLoader.load(App.class.getResource("Modify-Part-Form.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Modify Part");
         stage.show();
     }
 
@@ -69,6 +71,7 @@ public class MainFormView implements Initializable {
         Parent root = FXMLLoader.load(App.class.getResource("Add-Product-Form.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Add Product");
         stage.show();
     }
 
@@ -81,6 +84,7 @@ public class MainFormView implements Initializable {
         Parent root = FXMLLoader.load(App.class.getResource("Modify-Product-Form.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Modify Product");
         stage.show();
     }
 
@@ -91,8 +95,9 @@ public class MainFormView implements Initializable {
     private void productsRemove(ActionEvent event) throws IOException {
         System.out.println("Implement productsRemove button action!");
     }
-    /* End <--- Buttons FXML section ---> */
+    /* End      <--- Buttons FXML section ---> */
 
+    /* BEGIN    <--- Table FXML Section ---> */
     @FXML
     private TableView<Part> mainFormPartsTable;
 
@@ -122,6 +127,7 @@ public class MainFormView implements Initializable {
 
     @FXML
     private TableColumn<Product, Double> mainFormProductTableColumnPrice;
+    /* End      <--- Table FXML Section ---> */
 
     private final MainFormViewModel viewModel = new MainFormViewModel();
 

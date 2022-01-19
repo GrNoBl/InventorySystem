@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.layout.Pane?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="685.0" prefWidth="1158.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="685.0" prefWidth="1158.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gnb.inventorysystem.viewmodel.ModifyProductFormView">
    <children>
       <Label layoutX="69.0" layoutY="72.0" text="Modify Product">
          <font>
@@ -36,10 +36,10 @@
             <TableColumn fx:id="modifyProductTableAddColumnPrice" prefWidth="202.0" text="Price/Cost per Unit $" />
         </columns>
       </TableView>
-      <Button fx:id="modifyProductButtonAdd" layoutX="1023.0" layoutY="302.0" mnemonicParsing="false" text="Add" />
-      <Button fx:id="modifyProductButtonRemove" layoutX="957.0" layoutY="556.0" mnemonicParsing="false" text="Remove Associated Part" />
-      <Button fx:id="modifyProductButtonSave" layoutX="957.0" layoutY="599.0" mnemonicParsing="false" text="Save" />
-      <Button fx:id="modifyProductButtonCancel" layoutX="1049.0" layoutY="599.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="67.0" text="Cancel" />
+      <Button fx:id="modifyProductButtonAdd" layoutX="1023.0" layoutY="302.0" mnemonicParsing="false" text="Add" onAction="#productAdd" />
+      <Button fx:id="modifyProductButtonRemove" layoutX="957.0" layoutY="556.0" mnemonicParsing="false" text="Remove Associated Part" onAction="#productRemove"/>
+      <Button fx:id="modifyProductButtonSave" layoutX="957.0" layoutY="599.0" mnemonicParsing="false" text="Save" onAction="#productSave"/>
+      <Button fx:id="modifyProductButtonCancel" layoutX="1049.0" layoutY="599.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="67.0" text="Cancel" onAction="#productCancel"/>
       <TableView fx:id="modifyProductTableRemove" layoutX="541.0" layoutY="343.0" prefHeight="200.0" prefWidth="556.0">
          <columns>
             <TableColumn fx:id="modifyProductTableRemoveColumnId" prefWidth="120.0" text="Part ID" />
