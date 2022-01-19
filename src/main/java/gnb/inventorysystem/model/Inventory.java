@@ -8,7 +8,38 @@ import java.util.Comparator;
 
 public class Inventory {
     private static final ObservableList<Part> allParts = FXCollections.observableArrayList();
+
     private static final ObservableList<Product> allProducts = FXCollections.observableArrayList();
+
+    public static int generatePartId(ObservableList<Part> Parts) {
+        Comparator<Part> comparator = Comparator.comparingInt(Part::getId);
+        SortedList<Part> sortedParts = Parts.sorted(comparator);
+        int viablePartId = 1;
+
+        if (sortedParts.size() != 0) {
+            for (int i = 0; i < sortedParts.size(); i++) {
+                if (sortedParts.get(i).getId() != i + 1) {
+                    viablePartId = i + 1;
+                    break;
+                }
+            }
+        }
+        return viablePartId;
+    }
+
+    public static int generateProductId(ObservableList<Product> Products) {
+        Comparator<Product> comparator = Comparator.comparingInt(Product::getId);
+        SortedList<Product> sortedProducts = Products.sorted(comparator);
+
+        if (!(sortedProducts.size() == 0)) {
+            for (int i = 0; i < sortedProducts.size(); i++) {
+                if (sortedProducts.get(i).getId() == i + 1) {
+                    return i + 1;
+                }
+            }
+        }
+        return 1;
+    }
 
     public static void addPart(Part newPart) {
         allParts.add(newPart);

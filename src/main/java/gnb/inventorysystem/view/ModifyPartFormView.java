@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,6 +19,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ModifyPartFormView implements Initializable {
+    @FXML
+    private Label modifyLabelToggle;
+
+    @FXML
+    private void toggleMachineId(ActionEvent e) {
+        modifyLabelToggle.setText("Machine Id");
+    }
+
+    @FXML
+    private void toggleCompanyName(ActionEvent e) {
+        modifyLabelToggle.setText("Company Name");
+    }
+
     @FXML
     private RadioButton modifyRadioInHouse;
 
@@ -43,10 +57,7 @@ public class ModifyPartFormView implements Initializable {
     private TextField modifyPartFieldMin;
 
     @FXML
-    private TextField modifyPartFieldMachineId;
-
-    @FXML
-    private TextField modifyPartFieldCompanyName;
+    private TextField modifyPartFieldToggle;
 
     /* BEGIN <--- Buttons FXML section ---> */
     @FXML

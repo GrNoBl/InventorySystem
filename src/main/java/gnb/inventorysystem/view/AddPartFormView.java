@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,6 +19,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddPartFormView implements Initializable {
+    @FXML
+    private Label addPartLabelToggle;
+
+    @FXML
+    private void toggleMachineId(ActionEvent e) {
+        addPartLabelToggle.setText("Machine Id");
+    }
+
+    @FXML
+    private void toggleCompanyName(ActionEvent e) {
+        addPartLabelToggle.setText("Company Name");
+    }
+
     @FXML
     private RadioButton addPartRadioInHouse;
 
@@ -43,17 +57,24 @@ public class AddPartFormView implements Initializable {
     private TextField addPartFieldMin;
 
     @FXML
-    private TextField addPartFieldMachineId;
-
-    @FXML
-    private TextField addPartFieldCompanyName;
+    private TextField addPartFieldToggle;
 
     /* BEGIN <--- Buttons FXML section ---> */
     @FXML
     private Button addPartButtonSave;
 
-    @FXML void saveAdd(ActionEvent e) {
-        System.out.println("Implement saveAdd button action!");
+    private void returnToMainMenu() throws IOException {
+        Stage stage = App.getAppStage();
+        Parent root = FXMLLoader.load(App.class.getResource("Main-Form.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Inventory App 1.0");
+        stage.show();
+    }
+    @FXML
+    private void saveAdd(ActionEvent e) throws IOException{
+        viewModel.addPart(addPartFieldName, addPartFieldPrice, addPartFieldInventory, addPartFieldMax, addPartFieldMin, addPartFieldToggle, addPartRadioInHouse);
+        returnToMainMenu();
     }
 
     @FXML
@@ -61,12 +82,7 @@ public class AddPartFormView implements Initializable {
 
     @FXML
     private void cancelAdd(ActionEvent e) throws IOException {
-        Stage stage = App.getAppStage();
-        Parent root = FXMLLoader.load(App.class.getResource("Main-Form.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Inventory App 1.0");
-        stage.show();
+        returnToMainMenu();
     }
     /* BEGIN <--- Buttons FXML section ---> */
 
