@@ -1,8 +1,9 @@
-package gnb.inventorysystem.viewmodel;
+package gnb.inventorysystem.view;
 
 import gnb.inventorysystem.App;
 import gnb.inventorysystem.model.Part;
 import gnb.inventorysystem.model.Product;
+import gnb.inventorysystem.viewmodel.MainFormViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,11 +24,29 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainFormView implements Initializable {
+    private final MainFormViewModel viewModel = new MainFormViewModel();
+
+    /* START    <--- TextField FXML section ---> */
     @FXML
     private TextField mainFormPartsSearch;
 
     @FXML
+    private void partsSearch(KeyEvent k) {
+        if (k.getCode().equals(KeyCode.ENTER)) {
+            viewModel.searchPart(mainFormPartsSearch.getText(), mainFormPartsTable);
+        }
+    }
+
+    @FXML
     private TextField mainFormProductsSearch;
+
+    @FXML
+    private void productSearch(KeyEvent k) {
+        if (k.getCode().equals(KeyCode.ENTER)) {
+            viewModel.searchProduct(mainFormProductsSearch.getText(), mainFormProductsTable);
+        }
+    }
+    /* End      <--- TextField FXML section ---> */
 
     /* START    <--- Buttons FXML section ---> */
     @FXML
@@ -128,8 +149,6 @@ public class MainFormView implements Initializable {
     @FXML
     private TableColumn<Product, Double> mainFormProductTableColumnPrice;
     /* End      <--- Table FXML Section ---> */
-
-    private final MainFormViewModel viewModel = new MainFormViewModel();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

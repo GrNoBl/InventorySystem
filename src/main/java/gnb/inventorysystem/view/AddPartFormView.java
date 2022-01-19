@@ -1,6 +1,7 @@
-package gnb.inventorysystem.viewmodel;
+package gnb.inventorysystem.view;
 
 import gnb.inventorysystem.App;
+import gnb.inventorysystem.viewmodel.AddPartFormViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,50 +17,50 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ModifyPartFormView implements Initializable {
+public class AddPartFormView implements Initializable {
     @FXML
-    private RadioButton modifyRadioInHouse;
+    private RadioButton addPartRadioInHouse;
 
     @FXML
-    private RadioButton modifyPartRadioOutsourced;
+    private RadioButton addPartRadioOutsourced;
 
     @FXML
-    private TextField modifyPartFieldId;
+    private TextField addPartFieldId;
 
     @FXML
-    private TextField modifyPartFieldName;
+    private TextField addPartFieldName;
 
     @FXML
-    private TextField modifyPartFieldInventory;
+    private TextField addPartFieldInventory;
 
     @FXML
-    private TextField modifyPartFieldPrice;
+    private TextField addPartFieldPrice;
 
     @FXML
-    private TextField modifyPartFieldMax;
+    private TextField addPartFieldMax;
 
     @FXML
-    private TextField modifyPartFieldMin;
+    private TextField addPartFieldMin;
 
     @FXML
-    private TextField modifyPartFieldMachineId;
+    private TextField addPartFieldMachineId;
 
     @FXML
-    private TextField modifyPartFieldCompanyName;
+    private TextField addPartFieldCompanyName;
 
     /* BEGIN <--- Buttons FXML section ---> */
     @FXML
-    private Button modifyPartButtonSave;
+    private Button addPartButtonSave;
 
-    @FXML void saveModify(ActionEvent e) {
-        System.out.println("Implement saveModify button action!");
+    @FXML void saveAdd(ActionEvent e) {
+        System.out.println("Implement saveAdd button action!");
     }
 
     @FXML
-    private Button modifyPartButtonCancel;
+    private Button addPartButtonCancel;
 
     @FXML
-    private void cancelModify(ActionEvent e) throws IOException {
+    private void cancelAdd(ActionEvent e) throws IOException {
         Stage stage = App.getAppStage();
         Parent root = FXMLLoader.load(App.class.getResource("Main-Form.fxml"));
         Scene scene = new Scene(root);
@@ -69,10 +70,11 @@ public class ModifyPartFormView implements Initializable {
     }
     /* BEGIN <--- Buttons FXML section ---> */
 
-    private final ModifyPartFormViewModel viewModel = new ModifyPartFormViewModel();
+    private final AddPartFormViewModel viewModel = new AddPartFormViewModel();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
 }

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gnb.inventorysystem.viewmodel.MainFormView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gnb.inventorysystem.view.MainFormView">
    <children>
       <Label layoutX="25.0" layoutY="14.0" prefHeight="50.0" prefWidth="275.0" text="Inventory Management System">
          <font>
@@ -25,7 +25,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="mainFormPartsSearch" promptText="Search by ID or Name" layoutX="220.0" layoutY="78.0" prefHeight="36.0" prefWidth="217.0" />
+      <TextField fx:id="mainFormPartsSearch" promptText="Search by ID or Name" layoutX="220.0" layoutY="78.0" prefHeight="36.0" prefWidth="217.0" onKeyPressed="#partsSearch"/>
       <Button fx:id="mainFormPartsAdd" layoutX="240.0" layoutY="248.0" mnemonicParsing="false" text="Add" onAction="#partsAdd" />
       <Button fx:id="mainFormPartsModify" layoutX="302.0" layoutY="248.0" mnemonicParsing="false" text="Modify" onAction="#partsModify" />
       <Button fx:id="mainFormPartsRemove" layoutX="362.0" layoutY="248.0" mnemonicParsing="false" text="Remove" onAction="#partsRemove" />
@@ -43,7 +43,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="mainFormProductsSearch" promptText="Search by ID or Name" layoutX="673.0" layoutY="78.0" prefHeight="36.0" prefWidth="217.0" />
+      <TextField fx:id="mainFormProductsSearch" promptText="Search by ID or Name" layoutX="673.0" layoutY="78.0" prefHeight="36.0" prefWidth="217.0" onKeyPressed="#productSearch"/>
       <Button fx:id="mainFormProductAdd" layoutX="693.0" layoutY="248.0" mnemonicParsing="false" text="Add" onAction="#productsAdd"/>
       <Button fx:id="mainFormProductModify" layoutX="755.0" layoutY="248.0" mnemonicParsing="false" text="Modify" onAction="#productModify"/>
       <Button fx:id="mainFormProductRemove" layoutX="815.0" layoutY="248.0" mnemonicParsing="false" text="Remove" onAction="#productsRemove"/>

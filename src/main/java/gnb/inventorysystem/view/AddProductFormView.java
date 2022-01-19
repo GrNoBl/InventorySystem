@@ -1,4 +1,4 @@
-package gnb.inventorysystem.viewmodel;
+package gnb.inventorysystem.view;
 
 import gnb.inventorysystem.App;
 import gnb.inventorysystem.model.Product;
@@ -18,31 +18,31 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ModifyProductFormView implements Initializable {
+public class AddProductFormView  implements Initializable {
     @FXML
-    private TextField modifyProductFieldId;
+    private TextField addProductFieldId;
 
     @FXML
-    private TextField modifyProductFieldName;
+    private TextField addProductFieldName;
 
     @FXML
-    private TextField modifyProductFieldInventory;
+    private TextField addProductFieldInventory;
 
     @FXML
-    private TextField modifyProductFieldPrice;
+    private TextField addProductFieldPrice;
 
     @FXML
-    private TextField modifyProductFieldMax;
+    private TextField addProductFieldMax;
 
     @FXML
-    private TextField modifyProductFieldMin;
+    private TextField addProductFieldMin;
 
     @FXML
-    private TextField modifyProductFieldSearch;
+    private TextField addProductFieldSearch;
 
     /* BEGIN    <--- Button FXML section ---> */
     @FXML
-    private Button modifyProductButtonAdd;
+    private Button addProductButtonAdd;
 
     @FXML
     private void productAdd(ActionEvent e) {
@@ -50,14 +50,14 @@ public class ModifyProductFormView implements Initializable {
     }
 
     @FXML
-    private Button modifyProductButtonRemove;
+    private Button addProductButtonRemove;
 
     @FXML
     private void productRemove(ActionEvent e) {
         System.out.println("Implement productRemove button action!");
     }
     @FXML
-    private Button modifyProductButtonSave;
+    private Button addProductButtonSave;
 
     @FXML
     private void productSave(ActionEvent e) {
@@ -65,7 +65,7 @@ public class ModifyProductFormView implements Initializable {
     }
 
     @FXML
-    private Button modifyProductButtonCancel;
+    private Button addProductButtonCancel;
 
     @FXML
     private void productCancel(ActionEvent e) throws IOException {
@@ -80,37 +80,39 @@ public class ModifyProductFormView implements Initializable {
 
     /* BEGIN    <--- Table FXML Section ---> */
     @FXML
-    private TableView<Product> modifyProductTableAdd;
+    private TableView<Product> addProductTableAdd;
 
     @FXML
-    private TableColumn<Product, Integer> modifyProductTableAddColumnId;
+    private TableColumn<Product, Integer> addProductTableAddColumnId;
 
     @FXML
-    private TableColumn<Product, String> modifyProductTableAddColumnName;
+    private TableColumn<Product, String> addProductTableAddColumnName;
 
     @FXML
-    private TableColumn<Product, Integer> modifyProductTableAddColumnInventory;
+    private TableColumn<Product, Integer> addProductTableAddColumnInventory;
 
     @FXML
-    private TableColumn<Product, Double> modifyProductTableAddColumnPrice;
+    private TableColumn<Product, Double> addProductTableAddColumnPrice;
 
     @FXML
-    private TableView<Product> modifyProductTableRemove;
+    private TableView<Product> addProductTableRemove;
 
     @FXML
-    private TableColumn<Product, Integer> modifyProductTableRemoveColumnId;
+    private TableColumn<Product, Integer> addProductTableRemoveColumnId;
 
     @FXML
-    private TableColumn<Product, String> modifyProductTableRemoveColumnName;
+    private TableColumn<Product, String> addProductTableRemoveColumnName;
 
     @FXML
-    private TableColumn<Product, Integer> modifyProductTableRemoveColumnInventory;
+    private TableColumn<Product, Integer> addProductTableRemoveColumnInventory;
 
     @FXML
-    private TableColumn<Product, Double> modifyProductTableRemoveColumnPrice;
+    private TableColumn<Product, Double> addProductTableRemoveColumnPrice;
     /* End      <--- Table FXML Section ---> */
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
 }

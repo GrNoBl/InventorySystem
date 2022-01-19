@@ -9,4 +9,6 @@ module gnb.inventorysystem {
     exports gnb.inventorysystem.model;
     opens gnb.inventorysystem.viewmodel to javafx.fxml;
     exports gnb.inventorysystem.viewmodel;
+    exports gnb.inventorysystem.view;
+    opens gnb.inventorysystem.view to javafx.fxml;
 }

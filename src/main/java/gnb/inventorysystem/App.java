@@ -4,7 +4,6 @@ import gnb.inventorysystem.model.InHouse;
 import gnb.inventorysystem.model.Inventory;
 import gnb.inventorysystem.model.Outsourced;
 import gnb.inventorysystem.model.Product;
-import gnb.inventorysystem.viewmodel.MainFormView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
