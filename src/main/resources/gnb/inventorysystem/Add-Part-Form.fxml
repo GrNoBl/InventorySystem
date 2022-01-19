@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gnb.inventorysystem.viewmodel.AddPartFormView">
    <children>
       <Label layoutX="58.0" layoutY="62.0" text="Add Part">
          <font>
@@ -36,8 +36,8 @@
       <TextField fx:id="addPartFieldMax" layoutX="146.0" layoutY="326.0" />
       <TextField fx:id="addPartFieldMachineId" layoutX="143.0" layoutY="381.0" />
       <TextField fx:id="addPartFieldMin" layoutX="344.0" layoutY="327.0" />
-      <Button fx:id="addPartButtonSave" layoutX="299.0" layoutY="485.0" mnemonicParsing="false" text="Save" />
-      <Button fx:id="addPartButtonCancel" layoutX="389.0" layoutY="488.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="addPartButtonSave" layoutX="299.0" layoutY="485.0" mnemonicParsing="false" text="Save" onAction="#saveAdd" />
+      <Button fx:id="addPartButtonCancel" layoutX="389.0" layoutY="488.0" mnemonicParsing="false" text="Cancel" onAction="#cancelAdd"/>
       <Label layoutX="62.0" layoutY="439.0" text="Company Name" />
       <TextField fx:id="addPartFieldCompanyName" layoutX="183.0" layoutY="435.0" />
    </children>

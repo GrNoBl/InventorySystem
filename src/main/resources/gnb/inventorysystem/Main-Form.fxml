@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.layout.Pane?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gnb.inventorysystem.viewmodel.MainFormView">
    <children>
       <Label layoutX="25.0" layoutY="14.0" prefHeight="50.0" prefWidth="275.0" text="Inventory Management System">
          <font>
@@ -32,9 +32,9 @@
          </font>
       </Label>
       <TextField fx:id="mainFormPartsSearch" promptText="Search by ID or Name" layoutX="220.0" layoutY="78.0" prefHeight="36.0" prefWidth="217.0" />
-      <Button fx:id="mainFormPartsAdd" layoutX="240.0" layoutY="248.0" mnemonicParsing="false" text="Add" />
-      <Button fx:id="mainFormPartsModify" layoutX="302.0" layoutY="248.0" mnemonicParsing="false" text="Modify" />
-      <Button fx:id="mainFormPartsRemove" layoutX="362.0" layoutY="248.0" mnemonicParsing="false" text="Remove" />
+      <Button fx:id="mainFormPartsAdd" layoutX="240.0" layoutY="248.0" mnemonicParsing="false" text="Add" onAction="#partsAdd" />
+      <Button fx:id="mainFormPartsModify" layoutX="302.0" layoutY="248.0" mnemonicParsing="false" text="Modify" onAction="#partsModify" />
+      <Button fx:id="mainFormPartsRemove" layoutX="362.0" layoutY="248.0" mnemonicParsing="false" text="Remove" onAction="#partsRemove" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="204.0" layoutX="480.0" layoutY="80.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" width="408.0" />
       <TableView fx:id="mainFormProductsTable" layoutX="500.0" layoutY="120.0" prefHeight="125.0" prefWidth="369.0">
          <columns>
@@ -50,8 +50,8 @@
          </font>
       </Label>
       <TextField fx:id="mainFormProductsSearch" promptText="Search by ID or Name" layoutX="673.0" layoutY="78.0" prefHeight="36.0" prefWidth="217.0" />
-      <Button fx:id="mainFormProductAdd" layoutX="693.0" layoutY="248.0" mnemonicParsing="false" text="Add" />
-      <Button fx:id="mainFormProductModify" layoutX="755.0" layoutY="248.0" mnemonicParsing="false" text="Modify" />
-      <Button fx:id="mainFormProductRemove" layoutX="815.0" layoutY="248.0" mnemonicParsing="false" text="Remove" />
+      <Button fx:id="mainFormProductAdd" layoutX="693.0" layoutY="248.0" mnemonicParsing="false" text="Add" onAction="#productsAdd"/>
+      <Button fx:id="mainFormProductModify" layoutX="755.0" layoutY="248.0" mnemonicParsing="false" text="Modify" onAction="#productModify"/>
+      <Button fx:id="mainFormProductRemove" layoutX="815.0" layoutY="248.0" mnemonicParsing="false" text="Remove" onAction="#productsRemove"/>
    </children>
 </Pane>

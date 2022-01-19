@@ -49,27 +49,32 @@ public class AddPartFormView implements Initializable {
     @FXML
     private TextField addPartFieldCompanyName;
 
+    /* BEGIN <--- Buttons FXML section ---> */
     @FXML
     private Button addPartButtonSave;
 
+    @FXML void saveAdd(ActionEvent e) {
+        System.out.println("Implement saveAdd button action!");
+    }
+
     @FXML
     private Button addPartButtonCancel;
+
+    @FXML
+    private void cancelAdd(ActionEvent e) throws IOException {
+        Stage stage = App.getAppStage();
+        Parent root = FXMLLoader.load(App.class.getResource("Main-Form.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    /* BEGIN <--- Buttons FXML section ---> */
 
     private final AddPartFormViewModel viewModel = new AddPartFormViewModel();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        addPartButtonCancel.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t){
-                Stage stage = (Stage) addPartButtonCancel.getScene().getWindow();
-                try {
-                    Parent parent = FXMLLoader.load(Objects.requireNonNull(App.class.getResource("view/Main-Form.fxml")));
-                    stage.getScene().setRoot(parent);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
     }
+
 }

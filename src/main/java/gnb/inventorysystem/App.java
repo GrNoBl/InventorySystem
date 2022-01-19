@@ -7,6 +7,7 @@ import gnb.inventorysystem.model.Product;
 import gnb.inventorysystem.viewmodel.MainFormView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -14,16 +15,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
+    private static Stage appStage;
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(App.class.getResource("view/Main-Form.fxml"));
-        fxmlLoader.setController(new MainFormView());
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Inventory App 1.0");
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.show();
+        appStage = stage;
+        Parent root = FXMLLoader.load(getClass().getResource("Main-Form.fxml"));
+        Scene scene = new Scene(root);
+        appStage.setScene(scene);
+        appStage.show();
+    }
+
+    public static Stage getAppStage() {
+        return appStage;
     }
 
     public static void main(String[] args) {
