@@ -4,7 +4,6 @@ import gnb.inventorysystem.App;
 import gnb.inventorysystem.model.Part;
 import gnb.inventorysystem.model.Product;
 import gnb.inventorysystem.viewmodel.CommonViewModel;
-import gnb.inventorysystem.viewmodel.MainFormViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +22,32 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainFormView implements Initializable {
-    private final MainFormViewModel viewModel = new MainFormViewModel();
+    private final CommonViewModel cVM = CommonViewModel.getInstance();
 
-    private final CommonViewModel cmv = CommonViewModel.getInstance();
+    @FXML
+    private TextField mainFormPartsSearch;
+    @FXML
+    private TextField mainFormProductsSearch;
+    @FXML
+    private TableView<Part> mainFormPartsTable;
+    @FXML
+    private TableColumn<Part, Integer> mainFormPartsTableColumnId;
+    @FXML
+    private TableColumn<Part, String> mainFormPartsTableColumnName;
+    @FXML
+    private TableColumn<Part, Integer> mainFormPartsTableColumnInventory;
+    @FXML
+    private TableColumn<Part, Double> mainFormPartsTableColumnPrice;
+    @FXML
+    private TableView<Product> mainFormProductsTable;
+    @FXML
+    private TableColumn<Product, Integer> mainFormProductTableColumnId;
+    @FXML
+    private TableColumn<Product, String> mainFormProductTableColumnName;
+    @FXML
+    private TableColumn<Product, Integer> mainFormProductTableColumnInventory;
+    @FXML
+    private TableColumn<Product, Double> mainFormProductTableColumnPrice;
 
     private Optional<ButtonType> displayAlert(String type) {
         Alert warning = new Alert(Alert.AlertType.WARNING);
@@ -70,31 +92,19 @@ public class MainFormView implements Initializable {
         return error.showAndWait();
     }
 
-    /* START    <--- TextField FXML section ---> */
-    @FXML
-    private TextField mainFormPartsSearch;
-
     @FXML
     private void partsSearch(KeyEvent k) {
         if (k.getCode().equals(KeyCode.ENTER)) {
-            viewModel.searchPart(mainFormPartsSearch.getText(), mainFormPartsTable);
+            cVM.searchPart(mainFormPartsSearch.getText(), mainFormPartsTable);
         }
     }
-
-    @FXML
-    private TextField mainFormProductsSearch;
 
     @FXML
     private void productSearch(KeyEvent k) {
         if (k.getCode().equals(KeyCode.ENTER)) {
-            viewModel.searchProduct(mainFormProductsSearch.getText(), mainFormProductsTable);
+            cVM.searchProduct(mainFormProductsSearch.getText(), mainFormProductsTable);
         }
     }
-    /* End      <--- TextField FXML section ---> */
-
-    /* START    <--- Buttons FXML section ---> */
-    @FXML
-    private Button mainFormPartsAdd;
 
     @FXML
     private void partsAdd(ActionEvent event) throws IOException {
@@ -107,11 +117,8 @@ public class MainFormView implements Initializable {
     }
 
     @FXML
-    private Button mainFormPartsModify;
-
-    @FXML
     private void partsModify(ActionEvent event) throws IOException {
-        cmv.partToBeModified = mainFormPartsTable.getSelectionModel().getSelectedItem();
+        cVM.setPartToBeModified(mainFormPartsTable.getSelectionModel().getSelectedItem());
 
         Stage stage = App.getAppStage();
         Parent root = FXMLLoader.load(App.class.getResource("Modify-Part-Form.fxml"));
@@ -122,9 +129,6 @@ public class MainFormView implements Initializable {
     }
 
     @FXML
-    private Button mainFormPartsRemove;
-
-    @FXML
     private void partsRemove(ActionEvent event) {
         Part highlightedPart = mainFormPartsTable.getSelectionModel().getSelectedItem();
 
@@ -133,14 +137,11 @@ public class MainFormView implements Initializable {
         } else {
             Optional<ButtonType> choice = displayAlert("confirmation part delete");
             if (choice.isPresent() && choice.get() == ButtonType.OK) {
-                viewModel.removePart(highlightedPart);
+                cVM.removePart(highlightedPart);
                 mainFormPartsTable.refresh();
             }
         }
     }
-
-    @FXML
-    private Button mainFormProductAdd;
 
     @FXML
     private void productsAdd(ActionEvent event) throws IOException {
@@ -153,9 +154,6 @@ public class MainFormView implements Initializable {
     }
 
     @FXML
-    private Button mainFormProductModify;
-
-    @FXML
     private void productModify(ActionEvent event) throws IOException {
         Stage stage = App.getAppStage();
         Parent root = FXMLLoader.load(App.class.getResource("Modify-Product-Form.fxml"));
@@ -166,55 +164,20 @@ public class MainFormView implements Initializable {
     }
 
     @FXML
-    private Button mainFormProductRemove;
-
-    @FXML
     private void productsRemove(ActionEvent event) throws IOException {
         System.out.println("Implement productsRemove button action!");
     }
-    /* End      <--- Buttons FXML section ---> */
 
-    /* BEGIN    <--- Table FXML Section ---> */
-    @FXML
-    private TableView<Part> mainFormPartsTable;
-
-    @FXML
-    private TableColumn<Part, Integer> mainFormPartsTableColumnId;
-
-    @FXML
-    private TableColumn<Part, String> mainFormPartsTableColumnName;
-
-    @FXML
-    private TableColumn<Part, Integer> mainFormPartsTableColumnInventory;
-
-    @FXML
-    private TableColumn<Part, Double> mainFormPartsTableColumnPrice;
-
-    @FXML
-    private TableView<Product> mainFormProductsTable;
-
-    @FXML
-    private TableColumn<Product, Integer> mainFormProductTableColumnId;
-
-    @FXML
-    private TableColumn<Product, String> mainFormProductTableColumnName;
-
-    @FXML
-    private TableColumn<Product, Integer> mainFormProductTableColumnInventory;
-
-    @FXML
-    private TableColumn<Product, Double> mainFormProductTableColumnPrice;
-    /* End      <--- Table FXML Section ---> */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mainFormPartsTable.setItems(viewModel.getAllParts());
+        mainFormPartsTable.setItems(cVM.getAllParts());
         mainFormPartsTableColumnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         mainFormPartsTableColumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         mainFormPartsTableColumnInventory.setCellValueFactory(new PropertyValueFactory<>("Stock"));
         mainFormPartsTableColumnPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
 
-        mainFormProductsTable.setItems(viewModel.getAllProducts());
+        mainFormProductsTable.setItems(cVM.getAllProducts());
         mainFormProductTableColumnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         mainFormProductTableColumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         mainFormProductTableColumnInventory.setCellValueFactory(new PropertyValueFactory<>("Stock"));

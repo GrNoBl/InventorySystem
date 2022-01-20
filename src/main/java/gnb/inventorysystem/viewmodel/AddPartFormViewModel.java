@@ -6,12 +6,11 @@ import gnb.inventorysystem.model.Outsourced;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
-public class AddPartFormViewModel {
-    public AddPartFormViewModel() {
+// Class that contains only methods to allow abstract interaction with underlying model.
+public final class AddPartFormViewModel {
+    private AddPartFormViewModel() {}
 
-    }
-
-    public void addPart(TextField name, TextField price, TextField inv, TextField max, TextField min, TextField toggle, RadioButton inHouse) {
+    public static void addPart(TextField name, TextField price, TextField inv, TextField max, TextField min, TextField toggle, RadioButton inHouse) {
         int newId = Inventory.generatePartId(Inventory.getAllParts());
         String partName = name.getText();
         double partPrice = Double.parseDouble(price.getText());

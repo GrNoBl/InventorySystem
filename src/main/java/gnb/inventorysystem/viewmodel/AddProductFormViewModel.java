@@ -1,4 +1,6 @@
 package gnb.inventorysystem.viewmodel;
 
-public class AddProductFormViewModel {
+public final class AddProductFormViewModel {
+    private AddProductFormViewModel() {}
+
 }
