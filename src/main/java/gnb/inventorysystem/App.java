@@ -31,13 +31,13 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        InHouse tvScreen = new InHouse(1,"TV Screen", 300.00, 5, 1, 20,
+        InHouse tvScreen = new InHouse(3,"TV Screen", 300.00, 5, 1, 20,
                 101);
-        InHouse tvShell = new InHouse(2,"TV Shell", 100.00, 5, 1, 20,
+        InHouse tvShell = new InHouse(4,"TV Shell", 100.00, 5, 1, 20,
                 101);
-        InHouse powerCord = new InHouse(3,"Power Cord", 2.99, 5, 1, 20,
+        InHouse powerCord = new InHouse(5,"Power Cord", 2.99, 5, 1, 20,
                 101);
-        Outsourced remote = new Outsourced(4, "Remote Control",29.99, 50, 30,
+        Outsourced remote = new Outsourced(7, "Remote Control",29.99, 50, 30,
                 100, "Panasonic");
         Inventory.addPart(tvScreen);
         Inventory.addPart(tvShell);

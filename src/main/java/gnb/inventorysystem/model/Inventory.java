@@ -11,34 +11,56 @@ public class Inventory {
 
     private static final ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
+    // Generates a unique part id in ascending order.
     public static int generatePartId(ObservableList<Part> Parts) {
         Comparator<Part> comparator = Comparator.comparingInt(Part::getId);
         SortedList<Part> sortedParts = Parts.sorted(comparator);
-        int viablePartId = 1;
 
-        if (sortedParts.size() != 0) {
-            for (int i = 0; i < sortedParts.size(); i++) {
-                if (sortedParts.get(i).getId() != i + 1) {
-                    viablePartId = i + 1;
-                    break;
-                }
+        // If parts list is empty, return generated id as 1.
+        if (sortedParts.size() == 0) {
+            return 1;
+        }
+
+        // Check if there is an id 1, return 1 if not.
+        if (sortedParts.get(0).getId() != 1) {
+            return 1;
+        }
+
+        // Find the first id gap between two parts by looking at the difference between side by side parts, return the next integer within the gap.
+        for (int i = 1; i < sortedParts.size(); i++) {
+            if ((sortedParts.get(i).getId() - sortedParts.get(i-1).getId()) > 1) {
+                return sortedParts.get(i - 1).getId() + 1;
             }
         }
-        return viablePartId;
+
+        // By now list is not empty nor has any gaps. Returning the next id in order.
+        return sortedParts.size() + 1;
     }
 
+    // Generates a unique product id in ascending order.
     public static int generateProductId(ObservableList<Product> Products) {
         Comparator<Product> comparator = Comparator.comparingInt(Product::getId);
         SortedList<Product> sortedProducts = Products.sorted(comparator);
 
-        if (!(sortedProducts.size() == 0)) {
-            for (int i = 0; i < sortedProducts.size(); i++) {
-                if (sortedProducts.get(i).getId() == i + 1) {
-                    return i + 1;
-                }
+        // If parts list is empty, return generated id as 1.
+        if (sortedProducts.size() == 0) {
+            return 1;
+        }
+
+        // Check if there is an id 1, return 1 if not.
+        if (sortedProducts.get(0).getId() != 1) {
+            return 1;
+        }
+
+        // Find the first id gap between two products by looking at the difference between side by side products, return the next integer within the gap.
+        for (int i = 1; i < sortedProducts.size(); i++) {
+            if ((sortedProducts.get(i).getId() - sortedProducts.get(i-1).getId()) > 1) {
+                return sortedProducts.get(i - 1).getId() + 1;
             }
         }
-        return 1;
+
+        // By now list is not empty nor has any gaps. Returning the next id in order.
+        return sortedProducts.size() + 1;
     }
 
     public static void addPart(Part newPart) {

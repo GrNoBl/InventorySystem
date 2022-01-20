@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,10 +18,54 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainFormView implements Initializable {
     private final MainFormViewModel viewModel = new MainFormViewModel();
+
+    private Optional<ButtonType> displayAlert(String type) {
+        Alert warning = new Alert(Alert.AlertType.WARNING);
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+
+        switch (type) {
+            case "confirmation part delete" -> {
+                confirmation.setTitle("Delete part?");
+                confirmation.setHeaderText("You are attempting to delete the highlighted part, proceed?");
+                return confirmation.showAndWait();
+            }
+            case "missing part" -> {
+                warning.setTitle("Warning!");
+                warning.setHeaderText("Part not found");
+                return warning.showAndWait();
+            }
+            case "missing product" -> {
+                warning.setTitle("Warning!");
+                warning.setHeaderText("Product not found");
+                return warning.showAndWait();
+            }
+            case "part not selected" -> {
+                warning.setTitle("Warning!");
+                warning.setHeaderText("Part not selected");
+                return warning.showAndWait();
+            }
+            case "product not selected" -> {
+                warning.setTitle("Warning!");
+                warning.setHeaderText("Product not selected");
+                return warning.showAndWait();
+            }
+            case "product has parts" -> {
+                error.setTitle("Error");
+                error.setHeaderText("Parts Associated");
+                error.setContentText("All parts must be removed from product before deletion.");
+                return error.showAndWait();
+            }
+        }
+
+        error.setHeaderText("Improper error passed");
+        return error.showAndWait();
+    }
 
     /* START    <--- TextField FXML section ---> */
     @FXML
@@ -67,6 +108,8 @@ public class MainFormView implements Initializable {
 
     @FXML
     private void partsModify(ActionEvent event) throws IOException {
+        Part highlightedPart = mainFormPartsTable.getSelectionModel().getSelectedItem();
+
         Stage stage = App.getAppStage();
         Parent root = FXMLLoader.load(App.class.getResource("Modify-Part-Form.fxml"));
         Scene scene = new Scene(root);
@@ -79,8 +122,18 @@ public class MainFormView implements Initializable {
     private Button mainFormPartsRemove;
 
     @FXML
-    private void partsRemove(ActionEvent event) throws IOException {
-        System.out.println("Implement partsRemove button action!");
+    private void partsRemove(ActionEvent event) {
+        Part highlightedPart = mainFormPartsTable.getSelectionModel().getSelectedItem();
+
+        if (highlightedPart == null) {
+            displayAlert("part not selected");
+        } else {
+            Optional<ButtonType> choice = displayAlert("confirmation part delete");
+            if (choice.isPresent() && choice.get() == ButtonType.OK) {
+                viewModel.removePart(highlightedPart);
+                mainFormPartsTable.refresh();
+            }
+        }
     }
 
     @FXML
@@ -152,17 +205,17 @@ public class MainFormView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        mainFormPartsTable.setItems(viewModel.getAllParts());
         mainFormPartsTableColumnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         mainFormPartsTableColumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         mainFormPartsTableColumnInventory.setCellValueFactory(new PropertyValueFactory<>("Stock"));
         mainFormPartsTableColumnPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        mainFormPartsTable.getItems().addAll(viewModel.allParts);
 
+        mainFormProductsTable.setItems(viewModel.getAllProducts());
         mainFormProductTableColumnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         mainFormProductTableColumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         mainFormProductTableColumnInventory.setCellValueFactory(new PropertyValueFactory<>("Stock"));
         mainFormProductTableColumnPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        mainFormProductsTable.getItems().addAll(viewModel.allProducts);
 
     }
 

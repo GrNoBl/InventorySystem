@@ -11,12 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
 public class MainFormViewModel {
-    public final ObservableList<Part> allParts = FXCollections.observableArrayList();
-    public final ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
-    public MainFormViewModel() {
-        allParts.setAll(Inventory.getAllParts());
-        allProducts.setAll(Inventory.getAllProducts());
+    public ObservableList<Part> getAllParts() {
+        return Inventory.getAllParts();
+    }
+
+    public ObservableList<Product> getAllProducts() {
+        return Inventory.getAllProducts();
     }
 
     // Search function parses user input to determine valid input for an id search or name search.
@@ -24,13 +25,13 @@ public class MainFormViewModel {
         if (!text.matches("[0-9]+")) {
             System.out.println("Name searching");
             ObservableList<Part> foundParts = Inventory.lookupPart(text);
-            updateTable.getItems().setAll(foundParts);
+            updateTable.setItems(foundParts);
         } else {
             int parsedInt = Integer.parseInt(text);
             System.out.println("Id searching");
             ObservableList<Part> foundPart = FXCollections.observableArrayList();
             foundPart.add(Inventory.lookupPart(parsedInt));
-            updateTable.getItems().setAll(foundPart);
+            updateTable.setItems(foundPart);
         }
     }
 
@@ -47,5 +48,9 @@ public class MainFormViewModel {
             foundProduct.add(Inventory.lookupProduct(parsedInt));
             updateTable.getItems().setAll(foundProduct);
         }
+    }
+
+    public void removePart(Part highlightedPart) {
+        Inventory.deletePart(highlightedPart);
     }
 }
