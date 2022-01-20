@@ -1,6 +1,10 @@
 package gnb.inventorysystem.view;
 
 import gnb.inventorysystem.App;
+import gnb.inventorysystem.model.InHouse;
+import gnb.inventorysystem.model.Outsourced;
+import gnb.inventorysystem.model.Part;
+import gnb.inventorysystem.viewmodel.CommonViewModel;
 import gnb.inventorysystem.viewmodel.ModifyPartFormViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +23,41 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ModifyPartFormView implements Initializable {
+    private final CommonViewModel cmv = CommonViewModel.getInstance();
+
+    private void preLoadPart() {
+        Part part = cmv.partToBeModified;
+        if (part instanceof InHouse) {
+            modifyPartRadioInHouse.setSelected(true);
+            modifyPartFieldId.setText(Integer.toString(part.getId()));
+            modifyPartFieldName.setText(part.getName());
+            modifyPartFieldInventory.setText(Integer.toString(part.getStock()));
+            modifyPartFieldPrice.setText(Double.toString(part.getPrice()));
+            modifyPartFieldMax.setText(Integer.toString(part.getMax()));
+            modifyPartFieldMin.setText(Integer.toString(part.getMin()));
+            modifyPartFieldToggle.setText(Integer.toString(((InHouse) part).getMachineId()));
+        } else {
+            modifyPartRadioOutsourced.setSelected(true);
+            modifyLabelToggle.setText("Company Name");
+            modifyPartFieldId.setText(Integer.toString(part.getId()));
+            modifyPartFieldName.setText(part.getName());
+            modifyPartFieldInventory.setText(Integer.toString(part.getStock()));
+            modifyPartFieldPrice.setText(Double.toString(part.getPrice()));
+            modifyPartFieldMax.setText(Integer.toString(part.getMax()));
+            modifyPartFieldMin.setText(Integer.toString(part.getMin()));
+            modifyPartFieldToggle.setText(((Outsourced) part).getCompanyName());
+        }
+    }
+
+    private void returnToMainScene() throws IOException {
+        Stage stage = App.getAppStage();
+        Parent root = FXMLLoader.load(App.class.getResource("Main-Form.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Inventory App 1.0");
+        stage.show();
+    }
+
     @FXML
     private Label modifyLabelToggle;
 
@@ -33,7 +72,7 @@ public class ModifyPartFormView implements Initializable {
     }
 
     @FXML
-    private RadioButton modifyRadioInHouse;
+    private RadioButton modifyPartRadioInHouse;
 
     @FXML
     private RadioButton modifyPartRadioOutsourced;
@@ -63,8 +102,26 @@ public class ModifyPartFormView implements Initializable {
     @FXML
     private Button modifyPartButtonSave;
 
-    @FXML void saveModify(ActionEvent e) {
-        System.out.println("Implement saveModify button action!");
+    @FXML void saveModify(ActionEvent e) throws IOException{
+        int id = Integer.parseInt(modifyPartFieldId.getText());
+        String name = modifyPartFieldName.getText();
+        int inv = Integer.parseInt(modifyPartFieldInventory.getText());
+        Double price = Double.parseDouble(modifyPartFieldPrice.getText());
+        int max = Integer.parseInt(modifyPartFieldMax.getText());
+        int min = Integer.parseInt(modifyPartFieldMin.getText());
+
+        if (modifyPartRadioInHouse.isSelected()) {
+            int machineId = Integer.parseInt(modifyPartFieldToggle.getText());
+            InHouse modifiedPart = new InHouse(id, name, price, inv, min, max, machineId);
+            viewModel.addPart(modifiedPart);
+        } else {
+            String companyName = modifyLabelToggle.getText();
+            Outsourced modifiedPart = new Outsourced(id, name, price, inv, min, max, companyName);
+            viewModel.addPart(modifiedPart);
+        }
+
+        viewModel.removePart(cmv.partToBeModified);
+        returnToMainScene();
     }
 
     @FXML
@@ -72,12 +129,7 @@ public class ModifyPartFormView implements Initializable {
 
     @FXML
     private void cancelModify(ActionEvent e) throws IOException {
-        Stage stage = App.getAppStage();
-        Parent root = FXMLLoader.load(App.class.getResource("Main-Form.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Inventory App 1.0");
-        stage.show();
+        returnToMainScene();
     }
     /* BEGIN <--- Buttons FXML section ---> */
 
@@ -85,6 +137,6 @@ public class ModifyPartFormView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        preLoadPart();
     }
 }

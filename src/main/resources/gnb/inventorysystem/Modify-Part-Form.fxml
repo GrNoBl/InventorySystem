@@ -11,12 +11,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <RadioButton fx:id="modifyPartRadioInHouse" layoutX="194.0" layoutY="62.0" mnemonicParsing="false" selected="true" text="In-House" onAction="#toggleMachineId">
+      <RadioButton fx:id="modifyPartRadioInHouse" layoutX="194.0" layoutY="62.0" mnemonicParsing="false" onAction="#toggleMachineId" selected="true" text="In-House">
          <toggleGroup>
             <ToggleGroup fx:id="partToggleGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="modifyPartRadioOutsourced" layoutX="344.0" layoutY="62.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$partToggleGroup" onAction="#toggleCompanyName"/>
+      <RadioButton fx:id="modifyPartRadioOutsourced" layoutX="344.0" layoutY="62.0" mnemonicParsing="false" onAction="#toggleCompanyName" text="Outsourced" toggleGroup="$partToggleGroup" />
       <Label layoutX="69.0" layoutY="135.0" text="ID" />
       <Label layoutX="69.0" layoutY="185.0" text="Name" />
       <Label layoutX="69.0" layoutY="235.0" text="Inv" />
@@ -24,7 +24,7 @@
       <Label layoutX="69.0" layoutY="330.0" text="Max" />
       <Label layoutX="302.0" layoutY="330.0" text="Min" />
       <Label fx:id="modifyLabelToggle" layoutX="67.0" layoutY="384.0" text="Machine ID" />
-      <TextField fx:id="modifyPartFieldId" layoutX="155.0" layoutY="131.0" />
+      <TextField fx:id="modifyPartFieldId" disable="true" editable="false" layoutX="155.0" layoutY="131.0" />
       <TextField fx:id="modifyPartFieldName" layoutX="152.0" layoutY="182.0" />
       <TextField fx:id="modifyPartFieldInventory" layoutX="152.0" layoutY="232.0" />
       <TextField fx:id="modifyPartFieldPrice" layoutX="149.0" layoutY="283.0" />

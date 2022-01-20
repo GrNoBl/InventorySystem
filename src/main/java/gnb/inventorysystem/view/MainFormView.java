@@ -3,6 +3,7 @@ package gnb.inventorysystem.view;
 import gnb.inventorysystem.App;
 import gnb.inventorysystem.model.Part;
 import gnb.inventorysystem.model.Product;
+import gnb.inventorysystem.viewmodel.CommonViewModel;
 import gnb.inventorysystem.viewmodel.MainFormViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,8 @@ import java.util.ResourceBundle;
 
 public class MainFormView implements Initializable {
     private final MainFormViewModel viewModel = new MainFormViewModel();
+
+    private final CommonViewModel cmv = CommonViewModel.getInstance();
 
     private Optional<ButtonType> displayAlert(String type) {
         Alert warning = new Alert(Alert.AlertType.WARNING);
@@ -108,7 +111,7 @@ public class MainFormView implements Initializable {
 
     @FXML
     private void partsModify(ActionEvent event) throws IOException {
-        Part highlightedPart = mainFormPartsTable.getSelectionModel().getSelectedItem();
+        cmv.partToBeModified = mainFormPartsTable.getSelectionModel().getSelectedItem();
 
         Stage stage = App.getAppStage();
         Parent root = FXMLLoader.load(App.class.getResource("Modify-Part-Form.fxml"));
