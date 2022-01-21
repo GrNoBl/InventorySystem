@@ -154,6 +154,11 @@ public class MainFormView implements Initializable {
         }
     }
 
+    @FXML
+    private void applicationExit(ActionEvent event) {
+        System.exit(0);
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
