@@ -42,7 +42,7 @@ public class AddPartFormView implements Initializable {
 
     @FXML
     private void saveAdd(ActionEvent e) throws IOException{
-        AddPartFormViewModel.addPart(addPartFieldName,
+        boolean success = AddPartFormViewModel.addPart(addPartFieldName,
                 addPartFieldPrice,
                 addPartFieldInventory,
                 addPartFieldMax,
@@ -50,7 +50,9 @@ public class AddPartFormView implements Initializable {
                 addPartFieldToggle,
                 addPartRadioInHouse);
 
-        ViewUtility.returnToMainMenu();
+        if (success) {
+            ViewUtility.returnToMainMenu();
+        }
     }
 
     @FXML

@@ -1,23 +1,19 @@
 package gnb.inventorysystem.view;
 
-import gnb.inventorysystem.App;
 import gnb.inventorysystem.model.Part;
-import gnb.inventorysystem.model.Product;
 import gnb.inventorysystem.viewmodel.CommonViewModel;
+import gnb.inventorysystem.viewmodel.ModifyProductFormViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class ModifyProductFormView implements Initializable {
     private final CommonViewModel cVM = CommonViewModel.getInstance();
+    private final ObservableList<Part> partsAvailable = FXCollections.observableArrayList();
     private final ObservableList<Part> partsToBeAdded = FXCollections.observableArrayList();
 
     @FXML
@@ -41,14 +38,6 @@ public class ModifyProductFormView implements Initializable {
     private TextField modifyProductFieldMin;
     @FXML
     private TextField modifyProductFieldSearch;
-    @FXML
-    private Button modifyProductButtonAdd;
-    @FXML
-    private Button modifyProductButtonRemove;
-    @FXML
-    private Button modifyProductButtonSave;
-    @FXML
-    private Button modifyProductButtonCancel;
     @FXML
     private TableView<Part> modifyProductTableAdd;
     @FXML
@@ -71,19 +60,48 @@ public class ModifyProductFormView implements Initializable {
     private TableColumn<Part, Double> modifyProductTableRemoveColumnPrice;
 
     @FXML
-    private void productAdd(ActionEvent e) {
-        System.out.println("Implement productAdd button action!");
+    private void partsSearch(KeyEvent k) {
+        if (k.getCode().equals(KeyCode.ENTER)) {
+            ObservableList<Part> foundParts = cVM.searchPart(modifyProductFieldSearch.getText());
+            modifyProductTableAdd.setItems(foundParts);
+        }
     }
 
     @FXML
-    private void productRemove(ActionEvent e) {
-        System.out.println("Implement productRemove button action!");
+    private void partAdd(ActionEvent e) {
+        if (modifyProductTableAdd.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
+        Part selection = modifyProductTableAdd.getSelectionModel().getSelectedItem();
+        partsToBeAdded.add(selection);
     }
+
+    @FXML
+    private void partRemove(ActionEvent e) {
+        if (modifyProductTableRemove.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
+        Part selection = modifyProductTableRemove.getSelectionModel().getSelectedItem();
+        partsToBeAdded.remove(selection);    }
 
     @FXML
     private void productSave(ActionEvent e) throws IOException {
-        ViewUtility.returnToMainMenu();
+        boolean success = ModifyProductFormViewModel.modifyProduct(modifyProductFieldId,
+                modifyProductFieldName,
+                modifyProductFieldPrice,
+                modifyProductFieldInventory,
+                modifyProductFieldMax,
+                modifyProductFieldMin,
+                cVM,
+                modifyProductTableRemove);
+
+        if (success) {
+            ViewUtility.returnToMainMenu();
+        }
     }
+
     @FXML
     private void productCancel(ActionEvent e) throws IOException {
         ViewUtility.returnToMainMenu();
@@ -92,9 +110,22 @@ public class ModifyProductFormView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Setup product to be modified table contents here.
+        partsAvailable.addAll(cVM.getAllParts());
+        modifyProductTableAdd.setItems(partsAvailable);
+        modifyProductTableAddColumnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        modifyProductTableAddColumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        modifyProductTableAddColumnInventory.setCellValueFactory(new PropertyValueFactory<>("Stock"));
+        modifyProductTableAddColumnPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
 
-        modifyProductTableRemove.setItems(partsToBeAdded);
+        ModifyProductFormViewModel.preLoadProduct(modifyProductFieldId,
+                modifyProductFieldName,
+                modifyProductFieldPrice,
+                modifyProductFieldInventory,
+                modifyProductFieldMax,
+                modifyProductFieldMin,
+                cVM,
+                partsToBeAdded,
+                modifyProductTableRemove);
         modifyProductTableRemoveColumnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         modifyProductTableRemoveColumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         modifyProductTableRemoveColumnInventory.setCellValueFactory(new PropertyValueFactory<>("Stock"));

@@ -83,5 +83,15 @@ public class CommonViewModel {
     public void removePart(Part highlightedPart) {
         Inventory.deletePart(highlightedPart);
     }
+
+    public boolean removeProduct(Product highlightedProduct) {
+        if (highlightedProduct.getAllAssociatedParts().isEmpty()) {
+            Inventory.deleteProduct(highlightedProduct);
+        } else {
+            return false;
+        }
+
+        return true;
+    }
 }
 

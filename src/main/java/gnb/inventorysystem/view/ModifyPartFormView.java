@@ -1,14 +1,10 @@
 package gnb.inventorysystem.view;
 
-import gnb.inventorysystem.model.InHouse;
-import gnb.inventorysystem.model.Outsourced;
-import gnb.inventorysystem.model.Part;
 import gnb.inventorysystem.viewmodel.CommonViewModel;
 import gnb.inventorysystem.viewmodel.ModifyPartFormViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -52,7 +48,7 @@ public class ModifyPartFormView implements Initializable {
     }
 
     @FXML void saveModify(ActionEvent e) throws IOException{
-        ModifyPartFormViewModel.modifyPart(modifyPartFieldId,
+        boolean success = ModifyPartFormViewModel.modifyPart(modifyPartFieldId,
                 modifyPartFieldName,
                 modifyPartFieldPrice,
                 modifyPartFieldInventory,
@@ -61,7 +57,10 @@ public class ModifyPartFormView implements Initializable {
                 modifyPartFieldToggle,
                 modifyPartRadioInHouse,
                 cVM);
-        ViewUtility.returnToMainMenu();;
+
+        if (success) {
+            ViewUtility.returnToMainMenu();
+        }
     }
 
     @FXML

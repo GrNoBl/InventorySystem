@@ -50,49 +50,6 @@ public class MainFormView implements Initializable {
     @FXML
     private TableColumn<Product, Double> mainFormProductTableColumnPrice;
 
-    private Optional<ButtonType> displayAlert(String type) {
-        Alert warning = new Alert(Alert.AlertType.WARNING);
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-
-        switch (type) {
-            case "confirmation part delete" -> {
-                confirmation.setTitle("Delete part?");
-                confirmation.setHeaderText("You are attempting to delete the highlighted part, proceed?");
-                return confirmation.showAndWait();
-            }
-            case "missing part" -> {
-                warning.setTitle("Warning!");
-                warning.setHeaderText("Part not found");
-                return warning.showAndWait();
-            }
-            case "missing product" -> {
-                warning.setTitle("Warning!");
-                warning.setHeaderText("Product not found");
-                return warning.showAndWait();
-            }
-            case "part not selected" -> {
-                warning.setTitle("Warning!");
-                warning.setHeaderText("Part not selected");
-                return warning.showAndWait();
-            }
-            case "product not selected" -> {
-                warning.setTitle("Warning!");
-                warning.setHeaderText("Product not selected");
-                return warning.showAndWait();
-            }
-            case "product has parts" -> {
-                error.setTitle("Error");
-                error.setHeaderText("Parts Associated");
-                error.setContentText("All parts must be removed from product before deletion.");
-                return error.showAndWait();
-            }
-        }
-
-        error.setHeaderText("Improper error passed");
-        return error.showAndWait();
-    }
-
     @FXML
     private void partsSearch(KeyEvent k) {
         if (k.getCode().equals(KeyCode.ENTER)) {
@@ -120,6 +77,10 @@ public class MainFormView implements Initializable {
 
     @FXML
     private void partsModify(ActionEvent event) throws IOException {
+        if (mainFormPartsTable.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
         cVM.setPartToBeModified(mainFormPartsTable.getSelectionModel().getSelectedItem());
 
         Stage stage = App.getAppStage();
@@ -132,17 +93,18 @@ public class MainFormView implements Initializable {
 
     @FXML
     private void partsRemove(ActionEvent event) {
+        if (mainFormPartsTable.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
         Part highlightedPart = mainFormPartsTable.getSelectionModel().getSelectedItem();
 
-        if (highlightedPart == null) {
-            displayAlert("part not selected");
-        } else {
-            Optional<ButtonType> choice = displayAlert("confirmation part delete");
-            if (choice.isPresent() && choice.get() == ButtonType.OK) {
-                cVM.removePart(highlightedPart);
-                mainFormPartsTable.refresh();
-            }
+        Optional<ButtonType> choice = ViewUtility.displayAlert("confirmation part delete");
+        if (choice.isPresent() && choice.get() == ButtonType.OK) {
+            cVM.removePart(highlightedPart);
+            mainFormPartsTable.refresh();
         }
+
     }
 
     @FXML
@@ -157,6 +119,12 @@ public class MainFormView implements Initializable {
 
     @FXML
     private void productModify(ActionEvent event) throws IOException {
+        if (mainFormProductsTable.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
+        cVM.setProductToBeModified(mainFormProductsTable.getSelectionModel().getSelectedItem());
+
         Stage stage = App.getAppStage();
         Parent root = FXMLLoader.load(App.class.getResource("Modify-Product-Form.fxml"));
         Scene scene = new Scene(root);
@@ -166,8 +134,20 @@ public class MainFormView implements Initializable {
     }
 
     @FXML
-    private void productsRemove(ActionEvent event) throws IOException {
-        System.out.println("Implement productsRemove button action!");
+    private void productsRemove(ActionEvent event) {
+        if (mainFormProductsTable.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
+        Product highlightedProduct =  mainFormProductsTable.getSelectionModel().getSelectedItem();
+
+        Optional<ButtonType> choice = ViewUtility.displayAlert("confirmation product delete");
+        if (choice.isPresent() && choice.get() == ButtonType.OK) {
+            if (!cVM.removeProduct(highlightedProduct)) {
+                ViewUtility.displayAlert("product has parts");
+            }
+            mainFormPartsTable.refresh();
+        }
     }
 
 

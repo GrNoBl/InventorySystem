@@ -4,15 +4,18 @@ import gnb.inventorysystem.model.InHouse;
 import gnb.inventorysystem.model.Inventory;
 import gnb.inventorysystem.model.Outsourced;
 import gnb.inventorysystem.model.Part;
+import gnb.inventorysystem.view.ViewUtility;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+
+import java.util.stream.Stream;
 
 public final class ModifyPartFormViewModel {
     private ModifyPartFormViewModel(){
     }
 
-    public static void modifyPart(TextField id,
+    public static boolean modifyPart(TextField id,
                                   TextField name,
                                   TextField price,
                                   TextField inv,
@@ -22,13 +25,38 @@ public final class ModifyPartFormViewModel {
                                   RadioButton inHouse,
                                   CommonViewModel cVM) {
         int partId = Integer.parseInt(id.getText());
+        if (Stream.of(name, price, inv, max, min, toggle).anyMatch(textField -> textField.getText().isEmpty())) {
+            ViewUtility.displayAlert("input missing");
+            return false;
+        }
+
+        if (Stream.of(price, inv, max, min).anyMatch(textField -> !textField.getText().matches("\\d+(\\.\\d+)?"))) {
+            ViewUtility.displayAlert("numeric input expected");
+            return false;
+        }
+
         String partName = name.getText();
         double partPrice = Double.parseDouble(price.getText());
         int partInv = Integer.parseInt(inv.getText());
         int partMax = Integer.parseInt(max.getText());
         int partMin = Integer.parseInt(min.getText());
 
+        if (partMax < partMin) {
+            ViewUtility.displayAlert("min greater than max");
+            return false;
+        }
+
+        if ((partInv < partMin) || (partInv > partMax)) {
+            ViewUtility.displayAlert("inv out of range");
+            return false;
+        }
+
         if (inHouse.isSelected()) {
+            if (!toggle.getText().matches("[0-9]+")) {
+                ViewUtility.displayAlert("numeric input expected");
+                return false;
+            }
+
             int partMachineId = Integer.parseInt(toggle.getText());
             InHouse newInHousePart = new InHouse(partId,
                     partName,
@@ -51,6 +79,7 @@ public final class ModifyPartFormViewModel {
         }
 
         cVM.removePart(cVM.getPartToBeModified());
+        return true;
     }
 
     public static void preLoadPart(TextField id,

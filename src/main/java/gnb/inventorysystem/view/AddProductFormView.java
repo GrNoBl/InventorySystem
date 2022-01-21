@@ -1,13 +1,13 @@
 package gnb.inventorysystem.view;
 
 import gnb.inventorysystem.model.Part;
+import gnb.inventorysystem.viewmodel.AddProductFormViewModel;
 import gnb.inventorysystem.viewmodel.CommonViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,8 +25,6 @@ public class AddProductFormView  implements Initializable {
     private final ObservableList<Part> partsToBeAdded = FXCollections.observableArrayList();
 
     @FXML
-    private TextField addProductFieldId;
-    @FXML
     private TextField addProductFieldName;
     @FXML
     private TextField addProductFieldInventory;
@@ -38,14 +36,6 @@ public class AddProductFormView  implements Initializable {
     private TextField addProductFieldMin;
     @FXML
     private TextField addProductFieldSearch;
-    @FXML
-    private Button addProductButtonAdd;
-    @FXML
-    private Button addProductButtonRemove;
-    @FXML
-    private Button addProductButtonSave;
-    @FXML
-    private Button addProductButtonCancel;
     @FXML
     private TableView<Part> addProductTableAdd;
     @FXML
@@ -77,23 +67,40 @@ public class AddProductFormView  implements Initializable {
 
     @FXML
     private void partAdd(ActionEvent e) {
+        if (addProductTableAdd.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
         Part selection = addProductTableAdd.getSelectionModel().getSelectedItem();
         partsToBeAdded.add(selection);
     }
 
     @FXML
     private void partRemove(ActionEvent e) {
+        if (addProductTableRemove.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
         Part selection = addProductTableRemove.getSelectionModel().getSelectedItem();
         partsToBeAdded.remove(selection);
     }
 
     @FXML
     private void productSave(ActionEvent e) throws IOException{
-        ViewUtility.returnToMainMenu();
+        boolean success = AddProductFormViewModel.addProduct(addProductFieldName,
+                addProductFieldPrice,
+                addProductFieldInventory,
+                addProductFieldMax,
+                addProductFieldMin,
+                addProductTableRemove);
+
+        if (success) {
+            ViewUtility.returnToMainMenu();
+        }
     }
     @FXML
     private void productCancel(ActionEvent e) throws IOException {
-        ViewUtility.returnToMainMenu();;
+        ViewUtility.returnToMainMenu();
     }
 
     @Override
