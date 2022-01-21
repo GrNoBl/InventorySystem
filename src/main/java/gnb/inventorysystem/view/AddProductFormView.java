@@ -1,23 +1,19 @@
 package gnb.inventorysystem.view;
 
-import gnb.inventorysystem.App;
 import gnb.inventorysystem.model.Part;
-import gnb.inventorysystem.model.Product;
 import gnb.inventorysystem.viewmodel.CommonViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +21,8 @@ import java.util.ResourceBundle;
 
 public class AddProductFormView  implements Initializable {
     private final CommonViewModel cVM = CommonViewModel.getInstance();
-    private ObservableList<Part> partsToBeAdded = FXCollections.observableArrayList();
+    private final ObservableList<Part> partsAvailable = FXCollections.observableArrayList();
+    private final ObservableList<Part> partsToBeAdded = FXCollections.observableArrayList();
 
     @FXML
     private TextField addProductFieldId;
@@ -71,12 +68,23 @@ public class AddProductFormView  implements Initializable {
     private TableColumn<Part, Double> addProductTableRemoveColumnPrice;
 
     @FXML
-    private void productAdd(ActionEvent e) {
+    private void partsSearch(KeyEvent k) {
+        if (k.getCode().equals(KeyCode.ENTER)) {
+            ObservableList<Part> foundParts = cVM.searchPart(addProductFieldSearch.getText());
+            addProductTableAdd.setItems(foundParts);
+        }
     }
 
     @FXML
-    private void productRemove(ActionEvent e) {
-        System.out.println("Implement productRemove button action!");
+    private void partAdd(ActionEvent e) {
+        Part selection = addProductTableAdd.getSelectionModel().getSelectedItem();
+        partsToBeAdded.add(selection);
+    }
+
+    @FXML
+    private void partRemove(ActionEvent e) {
+        Part selection = addProductTableRemove.getSelectionModel().getSelectedItem();
+        partsToBeAdded.remove(selection);
     }
 
     @FXML
@@ -90,7 +98,8 @@ public class AddProductFormView  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addProductTableAdd.setItems(cVM.getAllParts());
+        partsAvailable.addAll(cVM.getAllParts());
+        addProductTableAdd.setItems(partsAvailable);
         addProductTableAddColumnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         addProductTableAddColumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         addProductTableAddColumnInventory.setCellValueFactory(new PropertyValueFactory<>("Stock"));

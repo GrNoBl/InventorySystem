@@ -22,7 +22,7 @@
       <TextField fx:id="addProductFieldInventory" layoutX="165.0" layoutY="247.0" promptText="Enter Inv" />
       <TextField fx:id="addProductFieldPrice" layoutX="165.0" layoutY="311.0" promptText="Enter Price $" />
       <TextField fx:id="addProductFieldMax" layoutX="150.0" layoutY="369.0" promptText="Enter Max" />
-      <TextField fx:id="addProductFieldSearch" layoutX="948.0" layoutY="47.0" promptText="Search by Part ID or Name" />
+      <TextField fx:id="addProductFieldSearch" layoutX="948.0" layoutY="47.0" promptText="Search by Part ID or Name" onKeyPressed="#partsSearch"/>
       <TableView fx:id="addProductTableAdd" layoutX="541.0" layoutY="90.0" prefHeight="200.0" prefWidth="556.0">
         <columns>
           <TableColumn fx:id="addProductTableAddColumnId" prefWidth="120.0" text="Part ID" />
@@ -31,8 +31,8 @@
             <TableColumn fx:id="addProductTableAddColumnPrice" prefWidth="202.0" text="Price/Cost per Unit $" />
         </columns>
       </TableView>
-      <Button fx:id="addProductButtonAdd" layoutX="1023.0" layoutY="302.0" mnemonicParsing="false" onAction="#productAdd" text="Add" />
-      <Button fx:id="addProductButtonRemove" layoutX="957.0" layoutY="556.0" mnemonicParsing="false" onAction="#productRemove" text="Remove Associated Part" />
+      <Button fx:id="addProductButtonAdd" layoutX="1023.0" layoutY="302.0" mnemonicParsing="false" onAction="#partAdd" text="Add" />
+      <Button fx:id="addProductButtonRemove" layoutX="957.0" layoutY="556.0" mnemonicParsing="false" onAction="#partRemove" text="Remove Associated Part" />
       <Button fx:id="addProductButtonSave" layoutX="957.0" layoutY="599.0" mnemonicParsing="false" onAction="#productSave" text="Save" />
       <Button fx:id="addProductButtonCancel" layoutX="1049.0" layoutY="599.0" mnemonicParsing="false" onAction="#productCancel" prefHeight="30.0" prefWidth="80.0" text="Cancel" />
       <TableView fx:id="addProductTableRemove" layoutX="553.0" layoutY="336.0" prefHeight="200.0" prefWidth="556.0">

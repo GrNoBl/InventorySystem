@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class ModifyProductFormView implements Initializable {
     private final CommonViewModel cVM = CommonViewModel.getInstance();
-    private ObservableList<Part> partsToBeAdded = FXCollections.observableArrayList();
+    private final ObservableList<Part> partsToBeAdded = FXCollections.observableArrayList();
 
     @FXML
     private TextField modifyProductFieldId;

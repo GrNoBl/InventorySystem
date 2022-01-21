@@ -4,6 +4,7 @@ import gnb.inventorysystem.App;
 import gnb.inventorysystem.model.Part;
 import gnb.inventorysystem.model.Product;
 import gnb.inventorysystem.viewmodel.CommonViewModel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,7 +96,8 @@ public class MainFormView implements Initializable {
     @FXML
     private void partsSearch(KeyEvent k) {
         if (k.getCode().equals(KeyCode.ENTER)) {
-            cVM.searchPart(mainFormPartsSearch.getText(), mainFormPartsTable);
+            ObservableList<Part> foundParts = cVM.searchPart(mainFormPartsSearch.getText());
+            mainFormPartsTable.setItems(foundParts);
         }
     }
 

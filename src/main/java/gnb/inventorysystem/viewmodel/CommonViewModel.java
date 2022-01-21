@@ -50,17 +50,18 @@ public class CommonViewModel {
     }
 
     // Search function parses user input to determine valid input for an id search or name search.
-    public void searchPart(String text, TableView<Part> updateTable) {
+    public ObservableList<Part> searchPart(String text) {
         if (!text.matches("[0-9]+")) {
-            System.out.println("Name searching");
-            ObservableList<Part> foundParts = Inventory.lookupPart(text);
-            updateTable.setItems(foundParts);
+            return Inventory.lookupPart(text);
         } else {
             int parsedInt = Integer.parseInt(text);
-            System.out.println("Id searching");
-            ObservableList<Part> foundPart = FXCollections.observableArrayList();
-            foundPart.add(Inventory.lookupPart(parsedInt));
-            updateTable.setItems(foundPart);
+            ObservableList<Part> foundParts = FXCollections.observableArrayList();
+            Part foundPart = Inventory.lookupPart(parsedInt);
+            if (foundPart == null) {
+                return foundParts;
+            }
+            foundParts.add(foundPart);
+            return foundParts;
         }
     }
 
