@@ -23,6 +23,7 @@ public class App extends Application {
         Scene scene = new Scene(root);
         appStage.setScene(scene);
         appStage.setTitle("Inventory App 1.0");
+        appStage.setResizable(false);
         appStage.show();
     }
 

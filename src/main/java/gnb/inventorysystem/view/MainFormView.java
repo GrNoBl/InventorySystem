@@ -72,6 +72,7 @@ public class MainFormView implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Add Part");
+            stage.setResizable(false);
             stage.show();
     }
 
@@ -88,6 +89,7 @@ public class MainFormView implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Modify Part");
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -114,6 +116,7 @@ public class MainFormView implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Add Product");
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -130,6 +133,7 @@ public class MainFormView implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Modify Product");
+        stage.setResizable(false);
         stage.show();
     }
 

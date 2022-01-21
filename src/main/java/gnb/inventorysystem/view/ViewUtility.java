@@ -20,6 +20,7 @@ public final class ViewUtility {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Inventory App 1.0");
+        stage.setResizable(false);
         stage.show();
     }
 
