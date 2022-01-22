@@ -1,5 +1,9 @@
 package gnb.inventorysystem.model;
 
+/**
+ * Defines a part that was outsourced from another company.
+ * Adds a field to track company purchased from.
+ */
 public class Outsourced extends Part{
     private String companyName;
 

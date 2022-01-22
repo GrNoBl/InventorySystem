@@ -1,5 +1,8 @@
 package gnb.inventorysystem.model;
 
+/**
+ * Outline of a part and its properties in an inventory.
+ */
 public abstract class Part {
     private int id;
     private String name;

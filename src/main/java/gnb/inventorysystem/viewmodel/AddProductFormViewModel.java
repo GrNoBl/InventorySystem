@@ -10,9 +10,19 @@ import javafx.scene.control.TextField;
 
 import java.util.stream.Stream;
 
+/**
+ * Static functionality class for the "Add Product" controller.
+ * Handles the user input validation.
+ * Connects underlying model functionality to the view's components.
+ */
 public final class AddProductFormViewModel {
     private AddProductFormViewModel() {}
 
+    /**
+     * Providing view components, scrapes these to build a valid product & saves it to the inventory.
+     * All parameters are FXML components.
+     * @return true if product was successfully added to inventory, false if validation failed and alert was raised.
+     */
     public static boolean addProduct(TextField name, TextField price, TextField inv, TextField max, TextField min, TableView<Part> parts) {
         int newID = Inventory.generateProductId(Inventory.getAllProducts());
         if (Stream.of(name, price, inv, max, min).anyMatch(textField -> textField.getText().isEmpty())) {

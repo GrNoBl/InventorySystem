@@ -11,10 +11,21 @@ import javafx.scene.control.TextField;
 
 import java.util.stream.Stream;
 
+/**
+ * Static functionality class for the "Modify Part" controller.
+ * Handles the user input validation.
+ * Connects underlying model functionality to the view's components.
+ */
 public final class ModifyPartFormViewModel {
     private ModifyPartFormViewModel(){
     }
 
+    /**
+     * Providing view components, scrapes these to build a valid part & saves it to the inventory.
+     * Most parameters are FXML components.
+     * @param cVM, needs the singleton class that holds the previously selected part inorder to remove it from inventory.
+     * @return true if part was successfully added to inventory, false if validation failed and alert was raised.
+     */
     public static boolean modifyPart(TextField id,
                                   TextField name,
                                   TextField price,
@@ -82,6 +93,11 @@ public final class ModifyPartFormViewModel {
         return true;
     }
 
+    /**
+     * Pre-populates forms fields with contents of the previous select part's contents.
+     * Most parameters are FXML components.
+     * @param cVM, needs the singleton class that holds the previously selected part inorder to populate the text fields.
+     */
     public static void preLoadPart(TextField id,
                                    TextField name,
                                    TextField price,

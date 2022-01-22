@@ -22,6 +22,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for interacting with the "Main" startup form.
+ * Implements adding, removing, and modifying both parts and products disabled in tables.
+ * Allows for searching both products and parts tables and displays results.
+ */
 public class MainFormView implements Initializable {
     private final CommonViewModel cVM = CommonViewModel.getInstance();
 
@@ -159,7 +164,9 @@ public class MainFormView implements Initializable {
         System.exit(0);
     }
 
-
+    /**
+     * When initialized, associates all parts in inventory in left table, and products in right.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mainFormPartsTable.setItems(cVM.getAllParts());

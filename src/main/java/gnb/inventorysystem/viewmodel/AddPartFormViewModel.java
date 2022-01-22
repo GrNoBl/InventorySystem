@@ -9,10 +9,19 @@ import javafx.scene.control.TextField;
 
 import java.util.stream.Stream;
 
-// Class that contains only methods to allow abstract interaction with underlying model.
+/**
+ * Static functionality class for the "Add Part" controller.
+ * Handles the user input validation.
+ * Connects underlying model functionality to the view's components.
+ */
 public final class AddPartFormViewModel {
     private AddPartFormViewModel() {}
 
+    /**
+     * Providing view components, scrapes these to build a valid part & saves it to the inventory.
+     * All parameters are FXML components.
+     * @return true if part was successfully added to inventory, false if validation failed and alert was raised.
+     */
     public static boolean addPart(TextField name, TextField price, TextField inv, TextField max, TextField min, TextField toggle, RadioButton inHouse) {
         int newId = Inventory.generatePartId(Inventory.getAllParts());
         if (Stream.of(name, price, inv, max, min, toggle).anyMatch(textField -> textField.getText().isEmpty())) {

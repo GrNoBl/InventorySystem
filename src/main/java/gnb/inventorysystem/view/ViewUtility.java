@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * A static class to provide utility to controllers such as returning to main form & common alerts.
+ */
 public final class ViewUtility {
     private ViewUtility(){}
 
@@ -24,6 +27,11 @@ public final class ViewUtility {
         stage.show();
     }
 
+    /**
+     * A utility method to display a specific alert.
+     * @param type, given specific string describing situation, proper alert with be raised.
+     * @return returns the alert dialog so that user interaction can be retrieved.
+     */
     public static Optional<ButtonType> displayAlert(String type) {
         Alert warning = new Alert(Alert.AlertType.WARNING);
         Alert error = new Alert(Alert.AlertType.ERROR);

@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for interacting with the "Modify Part" form.
+ * Allows for toggling between in house and outsourced.
+ * Implements saving part or canceling.
+ */
 public class ModifyPartFormView implements Initializable {
     private final CommonViewModel cVM = CommonViewModel.getInstance();
 
@@ -68,6 +73,9 @@ public class ModifyPartFormView implements Initializable {
         ViewUtility.returnToMainMenu();
     }
 
+    /**
+     * When initialized, preloads the fields with selected part's contents.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ModifyPartFormViewModel.preLoadPart(modifyPartFieldId,

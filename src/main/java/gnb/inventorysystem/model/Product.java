@@ -3,6 +3,10 @@ package gnb.inventorysystem.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Defines a product and its properties in an inventory.
+ * Products are comprised of 0 or more parts.
+ */
 public class Product{
     private final ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;

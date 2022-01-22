@@ -10,9 +10,20 @@ import javafx.scene.control.TextField;
 
 import java.util.stream.Stream;
 
+/**
+ * Static functionality class for the "Modify Product" controller.
+ * Handles the user input validation.
+ * Connects underlying model functionality to the view's components.
+ */
 public final class ModifyProductFormViewModel {
     private ModifyProductFormViewModel() {}
 
+    /**
+     * Providing view components, scrapes these to build a valid product & saves it to the inventory.
+     * Most parameters are FXML components.
+     * @param cVM, needs the singleton class that holds the previously selected product inorder to remove it from inventory.
+     * @return true if product was successfully added to inventory, false if validation failed and alert was raised.
+     */
     public static boolean modifyProduct(TextField id,
                                      TextField name,
                                      TextField price,
@@ -59,6 +70,11 @@ public final class ModifyProductFormViewModel {
         return true;
     }
 
+    /**
+     * Pre-populates forms fields with contents of the previous select product's contents.
+     * Most parameters are FXML components.
+     * @param cVM, needs the singleton class that holds the previously selected product inorder to populate the text fields.
+     */
     public static void preLoadProduct(TextField id,
                                       TextField name,
                                       TextField price,

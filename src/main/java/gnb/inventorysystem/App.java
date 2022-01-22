@@ -13,6 +13,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author Griffin Blinco
+ * Starts the application with a stage and starts the first scene.
+ * Also preloads parts and products used for UI testing.
+ * FUTURE ENHANCEMENT: Would benefit for database backend to provide saving application state.
+ */
 public class App extends Application {
     private static Stage appStage;
 

@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for interacting with the "Add Part" form.
+ * Allows for toggling between in house and outsourced.
+ * Implements saving part or canceling.
+ */
 public class AddPartFormView implements Initializable {
     @FXML
     private Label addPartLabelToggle;

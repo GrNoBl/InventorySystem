@@ -1,5 +1,9 @@
 package gnb.inventorysystem.model;
 
+/**
+ * Defines a part that is made in house.
+ * Adds a field machineID to track which equipment made this part.
+ */
 public class InHouse extends Part{
     private int machineId;
 

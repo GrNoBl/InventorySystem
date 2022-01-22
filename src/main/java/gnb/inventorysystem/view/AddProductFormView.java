@@ -19,6 +19,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for interacting with the "Add Product" form.
+ * Allows for adding or removing parts from a new product.
+ * Implements saving product or canceling.
+ */
 public class AddProductFormView  implements Initializable {
     private final CommonViewModel cVM = CommonViewModel.getInstance();
     private final ObservableList<Part> partsAvailable = FXCollections.observableArrayList();
@@ -103,6 +108,9 @@ public class AddProductFormView  implements Initializable {
         ViewUtility.returnToMainMenu();
     }
 
+    /**
+     * When initialized, associates first table with available parts and second table with new product parts.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         partsAvailable.addAll(cVM.getAllParts());
