@@ -73,8 +73,8 @@ public final class ModifyPartFormViewModel {
                     partName,
                     partPrice,
                     partInv,
-                    partMax,
                     partMin,
+                    partMax,
                     partMachineId);
             Inventory.addPart(newInHousePart);
         } else {
@@ -83,8 +83,8 @@ public final class ModifyPartFormViewModel {
                     partName,
                     partPrice,
                     partInv,
-                    partMax,
                     partMin,
+                    partMax,
                     partCompanyName);
             Inventory.addPart(newOutsourcedPart);
         }

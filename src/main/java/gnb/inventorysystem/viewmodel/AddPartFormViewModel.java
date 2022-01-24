@@ -57,11 +57,11 @@ public final class AddPartFormViewModel {
             }
 
             int partMachineId = Integer.parseInt(toggle.getText());
-            InHouse newInHousePart = new InHouse(newId, partName, partPrice, partInv, partMax, partMin, partMachineId);
+            InHouse newInHousePart = new InHouse(newId, partName, partPrice, partInv, partMin, partMax, partMachineId);
             Inventory.addPart(newInHousePart);
         } else {
             String partCompanyName = toggle.getText();
-            Outsourced newOutsourcedPart = new Outsourced(newId, partName, partPrice, partInv, partMax, partMin, partCompanyName);
+            Outsourced newOutsourcedPart = new Outsourced(newId, partName, partPrice, partInv, partMin, partMax, partCompanyName);
             Inventory.addPart(newOutsourcedPart);
         }
         return true;
